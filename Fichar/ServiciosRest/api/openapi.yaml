@@ -1,0 +1,915 @@
+openapi: 3.0.0
+info:
+  description: "Servicios REST para gestionar usuarios, trabajos, fichajes y claves\
+    \ de API"
+  title: API Registro Horario
+  version: 1.0.0
+servers:
+- description: Servidor local nodejs
+  url: http://localhost:8080
+tags:
+- name: Usuarios
+- name: Trabajos
+- name: Fichajes
+- name: ApiKey
+- name: Login
+paths:
+  /usuarios:
+    get:
+      operationId: getUsuarios
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Usuario"
+                type: array
+          description: Lista de usuarios
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Error interno del servidor
+      summary: Lista todos los usuarios
+      tags:
+      - Usuarios
+      x-eov-operation-handler: controllers/UsuariosController
+    post:
+      operationId: addUsuario
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Usuario"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Usuario"
+          description: Usuario creado
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Datos de entrada no válidos
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Error interno del servidor
+      summary: Crea un usuario
+      tags:
+      - Usuarios
+      x-eov-operation-handler: controllers/UsuariosController
+    put:
+      operationId: updateUsuario
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Usuario"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Usuario"
+          description: Usuario actualizado
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: El recurso no existe
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Error interno del servidor
+      summary: Actualiza un usuario (el id va en el body)
+      tags:
+      - Usuarios
+      x-eov-operation-handler: controllers/UsuariosController
+  /usuarios/{idUsuario}:
+    delete:
+      operationId: deleteUsuario
+      parameters:
+      - explode: false
+        in: path
+        name: idUsuario
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Usuario borrado
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: El recurso no existe
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Error interno del servidor
+      summary: Borra un usuario
+      tags:
+      - Usuarios
+      x-eov-operation-handler: controllers/UsuariosController
+    get:
+      operationId: getUsuarioById
+      parameters:
+      - explode: false
+        in: path
+        name: idUsuario
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Usuario"
+          description: Usuario
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: El recurso no existe
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Error interno del servidor
+      summary: Obtiene un usuario por id
+      tags:
+      - Usuarios
+      x-eov-operation-handler: controllers/UsuariosController
+  /trabajos:
+    get:
+      operationId: getTrabajos
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Trabajo"
+                type: array
+          description: Lista de trabajos
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Error interno del servidor
+      summary: Lista todos los trabajos
+      tags:
+      - Trabajos
+      x-eov-operation-handler: controllers/TrabajosController
+    post:
+      operationId: addTrabajo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trabajo"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trabajo"
+          description: Trabajo creado
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Datos de entrada no válidos
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Error interno del servidor
+      summary: Crea un trabajo
+      tags:
+      - Trabajos
+      x-eov-operation-handler: controllers/TrabajosController
+    put:
+      operationId: updateTrabajo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trabajo"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trabajo"
+          description: Trabajo actualizado
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: El recurso no existe
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Error interno del servidor
+      summary: Actualiza un trabajo (el id va en el body)
+      tags:
+      - Trabajos
+      x-eov-operation-handler: controllers/TrabajosController
+  /trabajos/{idTrabajo}:
+    delete:
+      operationId: deleteTrabajo
+      parameters:
+      - explode: false
+        in: path
+        name: idTrabajo
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Trabajo borrado
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: El recurso no existe
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Error interno del servidor
+      summary: Borra un trabajo
+      tags:
+      - Trabajos
+      x-eov-operation-handler: controllers/TrabajosController
+    get:
+      operationId: getTrabajoById
+      parameters:
+      - explode: false
+        in: path
+        name: idTrabajo
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trabajo"
+          description: Trabajo
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: El recurso no existe
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Error interno del servidor
+      summary: Obtiene un trabajo por id
+      tags:
+      - Trabajos
+      x-eov-operation-handler: controllers/TrabajosController
+  /fichajes:
+    get:
+      description: |
+        Todos los filtros son opcionales y combinables. Con soloAbierto=true devuelve solo fichajes sin salida cuya entrada sea de las últimas 12 horas.
+      operationId: getFichajes
+      parameters:
+      - explode: true
+        in: query
+        name: idUsuario
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Formato YYYY-MM-DD
+        explode: true
+        in: query
+        name: fechaDesde
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: Formato YYYY-MM-DD
+        explode: true
+        in: query
+        name: fechaHasta
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: soloAbierto
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Fichaje"
+                type: array
+          description: Lista de fichajes (incluye NombreUsuario y NombreTrabajo)
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Error interno del servidor
+      summary: Lista fichajes con filtros opcionales
+      tags:
+      - Fichajes
+      x-eov-operation-handler: controllers/FichajesController
+    post:
+      operationId: addFichaje
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FichajeNuevo"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fichaje"
+          description: Fichaje creado
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Datos de entrada no válidos
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Error interno del servidor
+      summary: Abre un fichaje (la entrada se pone con NOW() en el servidor)
+      tags:
+      - Fichajes
+      x-eov-operation-handler: controllers/FichajesController
+    put:
+      operationId: updateFichaje
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Fichaje"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fichaje"
+          description: Fichaje actualizado
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: El recurso no existe
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Error interno del servidor
+      summary: Actualiza un fichaje completo (uso de administración)
+      tags:
+      - Fichajes
+      x-eov-operation-handler: controllers/FichajesController
+  /fichajes/{idFichaje}:
+    delete:
+      operationId: deleteFichaje
+      parameters:
+      - explode: false
+        in: path
+        name: idFichaje
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Fichaje borrado
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: El recurso no existe
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Error interno del servidor
+      summary: Borra un fichaje
+      tags:
+      - Fichajes
+      x-eov-operation-handler: controllers/FichajesController
+    get:
+      operationId: getFichajeById
+      parameters:
+      - explode: false
+        in: path
+        name: idFichaje
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fichaje"
+          description: Fichaje
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: El recurso no existe
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Error interno del servidor
+      summary: Obtiene un fichaje por id
+      tags:
+      - Fichajes
+      x-eov-operation-handler: controllers/FichajesController
+  /fichajes/{idFichaje}/salida:
+    put:
+      operationId: cerrarFichaje
+      parameters:
+      - explode: false
+        in: path
+        name: idFichaje
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fichaje"
+          description: Fichaje cerrado
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: El recurso no existe
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Error interno del servidor
+      summary: Cierra un fichaje (salida = NOW() y cálculo de HorasTrabajadas)
+      tags:
+      - Fichajes
+      x-eov-operation-handler: controllers/FichajesController
+  /apikeys:
+    get:
+      operationId: getApiKeys
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ApiKey"
+                type: array
+          description: Lista de claves
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Error interno del servidor
+      summary: Lista las claves de API
+      tags:
+      - ApiKey
+      x-eov-operation-handler: controllers/ApiKeyController
+    post:
+      operationId: addApiKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApiKey"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiKey"
+          description: Clave creada
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Datos de entrada no válidos
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Error interno del servidor
+      summary: Crea una clave de API
+      tags:
+      - ApiKey
+      x-eov-operation-handler: controllers/ApiKeyController
+    put:
+      operationId: updateApiKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApiKey"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiKey"
+          description: Clave actualizada
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: El recurso no existe
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Error interno del servidor
+      summary: Actualiza una clave de API (el id va en el body)
+      tags:
+      - ApiKey
+      x-eov-operation-handler: controllers/ApiKeyController
+  /apikeys/{idKey}:
+    delete:
+      operationId: deleteApiKey
+      parameters:
+      - explode: false
+        in: path
+        name: idKey
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Clave borrada
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: El recurso no existe
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Error interno del servidor
+      summary: Borra una clave de API
+      tags:
+      - ApiKey
+      x-eov-operation-handler: controllers/ApiKeyController
+    get:
+      operationId: getApiKeyById
+      parameters:
+      - explode: false
+        in: path
+        name: idKey
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiKey"
+          description: Clave
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: El recurso no existe
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Error interno del servidor
+      summary: Obtiene una clave por id
+      tags:
+      - ApiKey
+      x-eov-operation-handler: controllers/ApiKeyController
+  /login:
+    post:
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoginResponse"
+          description: Credenciales correctas
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Usuario o clave incorrectos
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensaje"
+          description: Error interno del servidor
+      summary: Valida usuario y clave contra la tabla Usuarios
+      tags:
+      - Login
+      x-eov-operation-handler: controllers/LoginController
+components:
+  parameters:
+    idUsuario:
+      explode: false
+      in: path
+      name: idUsuario
+      required: true
+      schema:
+        type: integer
+      style: simple
+    idTrabajo:
+      explode: false
+      in: path
+      name: idTrabajo
+      required: true
+      schema:
+        type: integer
+      style: simple
+    idFichaje:
+      explode: false
+      in: path
+      name: idFichaje
+      required: true
+      schema:
+        type: integer
+      style: simple
+    idKey:
+      explode: false
+      in: path
+      name: idKey
+      required: true
+      schema:
+        type: integer
+      style: simple
+  responses:
+    PeticionInvalida:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Mensaje"
+      description: Datos de entrada no válidos
+    NoEncontrado:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Mensaje"
+      description: El recurso no existe
+    ErrorServidor:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Mensaje"
+      description: Error interno del servidor
+  schemas:
+    Usuario:
+      example:
+        IdUsuario: 0
+        Nombre: Nombre
+        Usuario: Usuario
+        Clave: Clave
+      properties:
+        IdUsuario:
+          type: integer
+        Nombre:
+          maxLength: 100
+          type: string
+        Usuario:
+          maxLength: 50
+          type: string
+        Clave:
+          maxLength: 50
+          type: string
+      required:
+      - Nombre
+      type: object
+    Trabajo:
+      example:
+        IdTrabajo: 0
+        Nombre: Nombre
+      properties:
+        IdTrabajo:
+          type: integer
+        Nombre:
+          maxLength: 200
+          type: string
+      required:
+      - Nombre
+      type: object
+    Fichaje:
+      example:
+        IdFichaje: 0
+        FechaHoraEntrada: FechaHoraEntrada
+        FechaHoraSalida: FechaHoraSalida
+        HorasTrabajadas: 6
+        IdTrabajo: 1
+        IdUsuario: 5
+        GeolocalizacionLatitud: 5.637377
+        GeolocalizacionLongitud: 2.302136
+        NombreUsuario: NombreUsuario
+        NombreTrabajo: NombreTrabajo
+      properties:
+        IdFichaje:
+          type: integer
+        FechaHoraEntrada:
+          description: "Formato MySQL: YYYY-MM-DD HH:MM:SS"
+          type: string
+        FechaHoraSalida:
+          description: "Formato MySQL: YYYY-MM-DD HH:MM:SS (null si sigue abierto)"
+          nullable: true
+          type: string
+        HorasTrabajadas:
+          nullable: true
+          type: integer
+        IdTrabajo:
+          type: integer
+        IdUsuario:
+          type: integer
+        GeolocalizacionLatitud:
+          format: float
+          type: number
+        GeolocalizacionLongitud:
+          format: float
+          type: number
+        NombreUsuario:
+          description: "Solo lectura, viene del JOIN con Usuarios"
+          type: string
+        NombreTrabajo:
+          description: "Solo lectura, viene del JOIN con Trabajos"
+          type: string
+      type: object
+    FichajeNuevo:
+      example:
+        IdTrabajo: 0
+        IdUsuario: 6
+        GeolocalizacionLatitud: 1.4658129
+        GeolocalizacionLongitud: 5.962134
+      properties:
+        IdTrabajo:
+          type: integer
+        IdUsuario:
+          type: integer
+        GeolocalizacionLatitud:
+          format: float
+          type: number
+        GeolocalizacionLongitud:
+          format: float
+          type: number
+      required:
+      - IdTrabajo
+      - IdUsuario
+      type: object
+    ApiKey:
+      example:
+        idKey: 0
+        Key: Key
+      properties:
+        idKey:
+          type: integer
+        Key:
+          maxLength: 50
+          type: string
+      required:
+      - Key
+      type: object
+    LoginRequest:
+      example:
+        Usuario: Usuario
+        Clave: Clave
+      properties:
+        Usuario:
+          type: string
+        Clave:
+          type: string
+      required:
+      - Clave
+      - Usuario
+      type: object
+    LoginResponse:
+      example:
+        IdUsuario: 0
+        Nombre: Nombre
+      properties:
+        IdUsuario:
+          type: integer
+        Nombre:
+          type: string
+      type: object
+    Mensaje:
+      example:
+        message: message
+      properties:
+        message:
+          type: string
+      type: object
