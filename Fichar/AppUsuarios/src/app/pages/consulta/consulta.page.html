@@ -1,13 +1,46 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>consulta</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Consulta fichajes</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">consulta</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-input label="Desde" type="date" [value]="desde()" (ionChange)="cambiarDesde($event)"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label="Hasta" type="date" [value]="hasta()" (ionChange)="cambiarHasta($event)"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <div class="ion-padding-horizontal ion-padding-top">
+    <ion-button size="small" fill="outline" (click)="verHoy()">Hoy</ion-button>
+  </div>
+
+  <ion-list>
+    @for (f of fichajes(); track f.IdFichaje) {
+      <ion-item lines="full">
+        <ion-label class="ion-text-wrap">
+          <h2>{{ f.NombreTrabajo }}</h2>
+          <p>Entrada: {{ f.FechaHoraEntrada }}</p>
+          <p>Salida: {{ f.FechaHoraSalida ?? 'Abierto' }}</p>
+          @if (f.GeolocalizacionLatitud != null && f.GeolocalizacionLongitud != null) {
+            <p>
+              Ubicación: {{ f.GeolocalizacionLatitud | number: '1.5-5' }},
+              {{ f.GeolocalizacionLongitud | number: '1.5-5' }}
+              · <a [href]="enlaceMapa(f)" target="_blank" rel="noopener">Ver mapa</a>
+            </p>
+          } @else {
+            <p>Ubicación: sin datos</p>
+          }
+        </ion-label>
+      </ion-item>
+    } @empty {
+      <ion-item><ion-label>No hay fichajes en este periodo</ion-label></ion-item>
+    }
+  </ion-list>
 </ion-content>
