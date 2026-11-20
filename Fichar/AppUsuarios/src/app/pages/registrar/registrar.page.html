@@ -1,13 +1,55 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>registrar</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Registrar fichaje</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">registrar</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  @switch (estado()) {
+    @case ('cargando') {
+      <div class="ion-text-center ion-padding"><ion-spinner></ion-spinner></div>
+    }
+
+    @case ('nuevo') {
+      <p>No tienes ningún fichaje abierto. Selecciona el trabajo para iniciar uno nuevo.</p>
+      @if (trabajos().length === 0) {
+        <p>No hay trabajos creados. Pídele al administrador que los cree desde la AppAdmin.</p>
+      } @else {
+        <ion-list>
+          <ion-item>
+            <ion-select label="Trabajo" labelPlacement="floating" interface="popover"
+                        placeholder="Selecciona un trabajo" [value]="trabajoSel()"
+                        (ionChange)="trabajoSel.set($event.detail.value)">
+              @for (t of trabajos(); track t.IdTrabajo) {
+                <ion-select-option [value]="t.IdTrabajo">{{ t.Nombre }}</ion-select-option>
+              }
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <ion-button expand="block" class="ion-margin-top"
+                    [disabled]="trabajoSel() === null || guardando()" (click)="iniciar()">
+          Iniciar fichaje
+        </ion-button>
+      }
+    }
+
+    @case ('abierto') {
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Fichaje abierto</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p><strong>Trabajo:</strong> {{ abierto()?.NombreTrabajo }}</p>
+          <p><strong>Entrada:</strong> {{ abierto()?.FechaHoraEntrada }}</p>
+        </ion-card-content>
+      </ion-card>
+      <p>Tienes un fichaje de las últimas 12 horas. Se va a finalizar dicho fichaje.</p>
+      <ion-button expand="block" color="danger" [disabled]="guardando()" (click)="finalizar()">
+        Finalizar fichaje
+      </ion-button>
+    }
+  }
 </ion-content>
