@@ -1,23 +1,29 @@
 /* eslint-disable no-unused-vars */
 const Service = require('./Service');
+const db = require('./db');
+const { rechazar } = require('./helpers');
 
 /**
 * Valida usuario y clave contra la tabla Usuarios
 *
-* loginRequest LoginRequest 
+* loginRequest LoginRequest
 * returns LoginResponse
 * */
-const login = ({ loginRequest }) => new Promise(
+const login = ({ body }) => new Promise(
   async (resolve, reject) => {
     try {
-      resolve(Service.successResponse({
-        loginRequest,
-      }));
+      const [rows] = await db.query(
+        'SELECT IdUsuario, Nombre FROM Usuarios WHERE Usuario = ? AND Clave = ?',
+        [body.Usuario, body.Clave],
+      );
+      if (rows.length === 0) {
+        const e = new Error('Usuario o clave incorrectos');
+        e.status = 401;
+        throw e;
+      }
+      resolve(Service.successResponse(rows[0]));
     } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
+      reject(rechazar(e));
     }
   },
 );
