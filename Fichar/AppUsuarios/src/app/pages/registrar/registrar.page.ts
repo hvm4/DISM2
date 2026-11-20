@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import {
   ToastController,
-  IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonContent,
+  IonHeader, IonToolbar, IonTitle, IonButtons, IonMenuButton, IonContent,
   IonSpinner, IonList, IonItem, IonSelect, IonSelectOption, IonButton,
   IonCard, IonCardHeader, IonCardTitle, IonCardContent,
 } from '@ionic/angular';
@@ -16,7 +16,7 @@ import { Fichajes } from '../../services/fichajes';
   selector: 'app-registrar',
   templateUrl: './registrar.page.html',
   imports: [
-    IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonContent,
+    IonHeader, IonToolbar, IonTitle, IonButtons, IonMenuButton, IonContent,
     IonSpinner, IonList, IonItem, IonSelect, IonSelectOption, IonButton,
     IonCard, IonCardHeader, IonCardTitle, IonCardContent,
   ],

@@ -1,14 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import {
-  IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton,
+  IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonMenuButton,
 } from '@ionic/angular';
 import { Auth } from '../services/auth';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
-  imports: [RouterLink, IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton],
+  imports: [RouterLink, IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonMenuButton],
 })
 export class HomePage {
   auth = inject(Auth);

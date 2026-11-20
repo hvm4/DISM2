@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import {
   ToastController,
-  IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonContent,
+  IonHeader, IonToolbar, IonTitle, IonButtons, IonMenuButton, IonContent,
   IonList, IonItem, IonLabel, IonInput, IonButton,
 } from '@ionic/angular';
 
@@ -23,7 +23,7 @@ function hoy(): string {
   templateUrl: './consulta.page.html',
   imports: [
     DecimalPipe,
-    IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonContent,
+    IonHeader, IonToolbar, IonTitle, IonButtons, IonMenuButton, IonContent,
     IonList, IonItem, IonLabel, IonInput, IonButton,
   ],
 })
