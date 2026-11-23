@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start"><ion-menu-button></ion-menu-button></ion-buttons>
+    <ion-title>Trabajos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    @for (t of trabajos(); track t.IdTrabajo) {
+      <ion-item lines="full">
+        <ion-label style="cursor: pointer" [routerLink]="['/trabajos', t.IdTrabajo]">
+          {{ t.Nombre }}
+        </ion-label>
+        <ion-button slot="end" fill="clear" color="danger" aria-label="Borrar trabajo"
+                    (click)="borrar(t)">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-button>
+      </ion-item>
+    } @empty {
+      <ion-item><ion-label>No hay trabajos</ion-label></ion-item>
+    }
+  </ion-list>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button routerLink="/trabajos/nuevo"><ion-icon name="add"></ion-icon></ion-fab-button>
+  </ion-fab>
+</ion-content>

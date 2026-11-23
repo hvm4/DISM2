@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Usuarios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    @for (u of usuarios(); track u.IdUsuario) {
+      <ion-item lines="full">
+        <ion-label style="cursor: pointer" [routerLink]="['/usuarios', u.IdUsuario]">
+          <h2>{{ u.Nombre }}</h2>
+          <p>{{ u.Usuario }}</p>
+        </ion-label>
+        <ion-button slot="end" fill="clear" color="danger" aria-label="Borrar usuario"
+                    (click)="borrar(u)">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-button>
+      </ion-item>
+    } @empty {
+      <ion-item><ion-label>No hay usuarios</ion-label></ion-item>
+    }
+  </ion-list>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button routerLink="/usuarios/nuevo">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

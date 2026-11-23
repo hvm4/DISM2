@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start"><ion-back-button defaultHref="/usuarios"></ion-back-button></ion-buttons>
+    <ion-title>{{ id === null ? 'Nuevo usuario' : 'Usuario' }}</ion-title>
+    <ion-buttons slot="end"><ion-menu-button></ion-menu-button></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="guardar()">
+    <ion-list>
+      @if (id !== null) {
+        <ion-item><ion-input label="Id" labelPlacement="stacked" [value]="id" readonly></ion-input></ion-item>
+      }
+      <ion-item><ion-input label="Nombre *" labelPlacement="stacked" formControlName="Nombre"></ion-input></ion-item>
+      <ion-item><ion-input label="Usuario" labelPlacement="stacked" formControlName="Usuario"></ion-input></ion-item>
+      <ion-item><ion-input label="Clave" labelPlacement="stacked" type="password" formControlName="Clave"></ion-input></ion-item>
+    </ion-list>
+    <ion-button type="submit" expand="block" class="ion-margin-top">Guardar</ion-button>
+  </form>
+</ion-content>

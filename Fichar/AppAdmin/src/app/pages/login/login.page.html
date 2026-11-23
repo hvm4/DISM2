@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Administración · Registro horario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h2>Iniciar sesión</h2>
+  <form [formGroup]="form" (ngSubmit)="entrar()">
+    <ion-list>
+      <ion-item>
+        <ion-input label="Usuario" labelPlacement="floating" formControlName="Usuario"
+                   autocomplete="username"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Clave" labelPlacement="floating" type="password" formControlName="Clave"
+                   autocomplete="current-password"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-button type="submit" expand="block" class="ion-margin-top" [disabled]="cargando()">
+      Entrar
+    </ion-button>
+  </form>
+</ion-content>
