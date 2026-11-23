@@ -7,6 +7,8 @@ info:
 servers:
 - description: Servidor local nodejs
   url: http://localhost:8080
+security:
+- ApiKeyAuth: []
 tags:
 - name: Usuarios
 - name: Trabajos
@@ -720,6 +722,11 @@ paths:
       - Login
       x-eov-operation-handler: controllers/LoginController
 components:
+  securitySchemes:
+    ApiKeyAuth:
+      in: header
+      name: X-API-Key
+      type: apiKey
   parameters:
     idUsuario:
       explode: false

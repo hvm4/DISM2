@@ -1,101 +1,68 @@
 /* eslint-disable no-unused-vars */
 const Service = require('./Service');
+const db = require('./db');
+const { noEncontrado, rechazar } = require('./helpers');
 
-/**
-* Crea una clave de API
-*
-* apiKey ApiKey 
-* returns ApiKey
-* */
-const addApiKey = ({ apiKey }) => new Promise(
+const addApiKey = ({ body }) => new Promise(
   async (resolve, reject) => {
     try {
-      resolve(Service.successResponse({
-        apiKey,
-      }));
+      const [result] = await db.query(
+        'INSERT INTO ApiKey (`Key`) VALUES (?)',
+        [body.Key],
+      );
+      resolve(Service.successResponse({ idKey: result.insertId, Key: body.Key }, 201));
     } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
+      reject(rechazar(e));
     }
   },
 );
-/**
-* Borra una clave de API
-*
-* idKey Integer 
-* returns Mensaje
-* */
+
 const deleteApiKey = ({ idKey }) => new Promise(
   async (resolve, reject) => {
     try {
-      resolve(Service.successResponse({
-        idKey,
-      }));
+      const [result] = await db.query('DELETE FROM ApiKey WHERE idKey = ?', [idKey]);
+      if (result.affectedRows === 0) throw noEncontrado('La clave no existe');
+      resolve(Service.successResponse({ message: 'Clave borrada' }));
     } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
+      reject(rechazar(e));
     }
   },
 );
-/**
-* Obtiene una clave por id
-*
-* idKey Integer 
-* returns ApiKey
-* */
+
 const getApiKeyById = ({ idKey }) => new Promise(
   async (resolve, reject) => {
     try {
-      resolve(Service.successResponse({
-        idKey,
-      }));
+      const [rows] = await db.query('SELECT idKey, `Key` FROM ApiKey WHERE idKey = ?', [idKey]);
+      if (rows.length === 0) throw noEncontrado('La clave no existe');
+      resolve(Service.successResponse(rows[0]));
     } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
+      reject(rechazar(e));
     }
   },
 );
-/**
-* Lista las claves de API
-*
-* returns List
-* */
+
 const getApiKeys = () => new Promise(
   async (resolve, reject) => {
     try {
-      resolve(Service.successResponse({
-      }));
+      const [rows] = await db.query('SELECT idKey, `Key` FROM ApiKey ORDER BY idKey');
+      resolve(Service.successResponse(rows));
     } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
+      reject(rechazar(e));
     }
   },
 );
-/**
-* Actualiza una clave de API (el id va en el body)
-*
-* apiKey ApiKey 
-* returns ApiKey
-* */
-const updateApiKey = ({ apiKey }) => new Promise(
+
+const updateApiKey = ({ body }) => new Promise(
   async (resolve, reject) => {
     try {
-      resolve(Service.successResponse({
-        apiKey,
-      }));
+      const [result] = await db.query(
+        'UPDATE ApiKey SET `Key` = ? WHERE idKey = ?',
+        [body.Key, body.idKey],
+      );
+      if (result.affectedRows === 0) throw noEncontrado('La clave no existe');
+      resolve(Service.successResponse({ idKey: body.idKey, Key: body.Key }));
     } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
+      reject(rechazar(e));
     }
   },
 );

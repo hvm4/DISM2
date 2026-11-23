@@ -11,6 +11,7 @@ const bodyParser = require('body-parser');
 const OpenApiValidator = require('express-openapi-validator');
 const logger = require('./logger');
 const config = require('./config');
+const { comprobarApiKey } = require('./services/apiKeyAuth');
 
 class ExpressServer {
   constructor(port, openApiYaml) {
@@ -52,6 +53,9 @@ class ExpressServer {
         apiSpec: this.openApiPath,
         operationHandlers: path.join(__dirname),
         fileUploader: { dest: config.FILE_UPLOAD_PATH },
+        validateSecurity: {
+          handlers: { ApiKeyAuth: (req) => comprobarApiKey(req) },
+        },
       }),
     );
   }
