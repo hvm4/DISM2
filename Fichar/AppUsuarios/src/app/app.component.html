@@ -1,11 +1,11 @@
 <ion-app>
   <ion-split-pane contentId="main-content" [disabled]="!auth.usuario()">
-    <ion-menu contentId="main-content" [disabled]="!auth.usuario()">
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>Menú</ion-title>
-        </ion-toolbar>
-      </ion-header>
+  <ion-menu contentId="main-content" [disabled]="!auth.usuario()">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Menú</ion-title>
+      </ion-toolbar>
+    </ion-header>
       <ion-content>
         <ion-list>
           <ion-menu-toggle auto-hide="false">

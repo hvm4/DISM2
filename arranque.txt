@@ -1,0 +1,31 @@
+# 0. Base de datos (solo si no está arrancada)
+sudo systemctl start mysql
+
+# 1. Servidor REST  -> http://localhost:8080  (Swagger: /api-docs)
+cd ~/Documentos/DISM2/Fichar/ServiciosRest
+node index.js
+
+# 2. AppAdmin  -> http://localhost:8100
+cd ~/Documentos/DISM2/Fichar/AppAdmin
+ionic serve --port=8100
+
+# 3. AppUsuarios  -> http://localhost:8101
+cd ~/Documentos/DISM2/Fichar/AppUsuarios
+ionic serve --port=8101
+
+---------------CONTRASEÑAS---------------
+
+Base de datos: usuario dism, contraseña Dism2026! (mysql -u dism -p dism).
+ApiKey: clave-dism-2026.
+Login de las apps: el usuario que hayas creado en la tabla Usuarios.
+
+
+----------------PWA---------------------
+
+cd ~/Documentos/DISM2/Fichar/AppAdmin
+npx ng build --configuration production
+npx http-server www -p 8200 -c-1     # http://localhost:8200
+
+cd ~/Documentos/DISM2/Fichar/AppUsuarios
+npx ng build --configuration production
+npx http-server www -p 8201 -c-1     # http://localhost:8201

@@ -1,17 +1,34 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
     <ion-title>Inicio</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="salir()">Salir</ion-button>
+      <ion-button (click)="salir()">
+        <ion-icon slot="start" name="log-out-outline"></ion-icon>
+        Salir
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <h2>Hola, {{ auth.usuario()?.Nombre }}</h2>
-  <ion-button expand="block" routerLink="/registrar">Registrar fichaje</ion-button>
-  <ion-button expand="block" routerLink="/consulta">Consulta fichajes</ion-button>
+
+  <ion-card button routerLink="/registrar">
+    <ion-card-header class="ion-text-center">
+      <ion-icon name="time-outline" size="large" color="primary"></ion-icon>
+      <ion-card-title>Registrar fichaje</ion-card-title>
+      <ion-card-subtitle>Inicia o finaliza tu jornada</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card button routerLink="/consulta">
+    <ion-card-header class="ion-text-center">
+      <ion-icon name="list-outline" size="large" color="primary"></ion-icon>
+      <ion-card-title>Consulta fichajes</ion-card-title>
+      <ion-card-subtitle>Revisa tus fichajes por fechas</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
 </ion-content>

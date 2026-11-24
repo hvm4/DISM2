@@ -1,17 +1,42 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
-    <ion-title>Inicio</ion-title>
+    <ion-title>Administración</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="salir()">Salir</ion-button>
+      <ion-button (click)="salir()">
+        <ion-icon slot="start" name="log-out-outline"></ion-icon>
+        Salir
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <ion-button [routerLink]="['/usuarios']" color="primary" expand="block">Gestión Usuarios</ion-button>
-  <ion-button [routerLink]="['/trabajos']" color="primary" expand="block">Gestión Trabajos</ion-button>
-  <ion-button [routerLink]="['/fichajes']" color="primary" expand="block">Gestión Fichajes</ion-button>
+<ion-content class="ion-padding">
+  <h2>Hola, {{ auth.usuario()?.Nombre }}</h2>
+
+  <ion-card button routerLink="/usuarios">
+    <ion-card-header class="ion-text-center">
+      <ion-icon name="people-outline" size="large" color="primary"></ion-icon>
+      <ion-card-title>Usuarios</ion-card-title>
+      <ion-card-subtitle>Alta, edición y baja de usuarios</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card button routerLink="/trabajos">
+    <ion-card-header class="ion-text-center">
+      <ion-icon name="briefcase-outline" size="large" color="primary"></ion-icon>
+      <ion-card-title>Trabajos</ion-card-title>
+      <ion-card-subtitle>Gestión de los trabajos disponibles</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card button routerLink="/fichajes">
+    <ion-card-header class="ion-text-center">
+      <ion-icon name="time-outline" size="large" color="primary"></ion-icon>
+      <ion-card-title>Fichajes</ion-card-title>
+      <ion-card-subtitle>Consulta de fichajes y ubicaciones</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
 </ion-content>
