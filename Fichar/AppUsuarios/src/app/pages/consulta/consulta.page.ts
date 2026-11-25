@@ -3,8 +3,12 @@ import { DecimalPipe } from '@angular/common';
 import {
   ToastController,
   IonHeader, IonToolbar, IonTitle, IonButtons, IonMenuButton, IonContent,
-  IonList, IonItem, IonLabel, IonInput, IonButton,
+  IonCard, IonInput, IonButton, IonIcon,
 } from '@ionic/angular';
+import { addIcons } from 'ionicons';
+import {
+  todayOutline, timeOutline, logInOutline, logOutOutline, locationOutline, mapOutline,
+} from 'ionicons/icons';
 
 import { Fichaje } from '../../models/models';
 import { Auth } from '../../services/auth';
@@ -24,7 +28,7 @@ function hoy(): string {
   imports: [
     DecimalPipe,
     IonHeader, IonToolbar, IonTitle, IonButtons, IonMenuButton, IonContent,
-    IonList, IonItem, IonLabel, IonInput, IonButton,
+    IonCard, IonInput, IonButton, IonIcon,
   ],
 })
 export class ConsultaPage {
@@ -35,6 +39,10 @@ export class ConsultaPage {
   desde = signal(hoy());
   hasta = signal(hoy());
   fichajes = signal<Fichaje[]>([]);
+
+  constructor() {
+    addIcons({ todayOutline, timeOutline, logInOutline, logOutOutline, locationOutline, mapOutline });
+  }
 
   ionViewWillEnter() {
     this.cargar();

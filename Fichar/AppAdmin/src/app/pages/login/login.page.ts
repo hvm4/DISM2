@@ -3,8 +3,10 @@ import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   ToastController,
-  IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonInput, IonButton,
+  IonContent, IonInput, IonInputPasswordToggle, IonButton, IonIcon, IonSpinner,
 } from '@ionic/angular';
+import { addIcons } from 'ionicons';
+import { personOutline, lockClosedOutline, logInOutline, briefcaseOutline } from 'ionicons/icons';
 import { Auth } from '../../services/auth';
 
 @Component({
@@ -12,7 +14,7 @@ import { Auth } from '../../services/auth';
   templateUrl: './login.page.html',
   imports: [
     ReactiveFormsModule,
-    IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonInput, IonButton,
+    IonContent, IonInput, IonInputPasswordToggle, IonButton, IonIcon, IonSpinner,
   ],
 })
 export class LoginPage {
@@ -26,6 +28,10 @@ export class LoginPage {
     Usuario: ['', Validators.required],
     Clave: ['', Validators.required],
   });
+
+  constructor() {
+    addIcons({ personOutline, lockClosedOutline, logInOutline, briefcaseOutline });
+  } 
 
   entrar() {
     if (this.form.invalid) { this.form.markAllAsTouched(); return; }

@@ -13,22 +13,40 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <h2>Hola, {{ auth.usuario()?.Nombre }}</h2>
+<ion-content>
+  <div class="inicio-hero">
+    <ion-icon name="person-circle-outline"></ion-icon>
+    <div>
+      <h2>Hola, {{ auth.usuario()?.Nombre }}</h2>
+      <p>{{ fecha }}</p>
+    </div>
+  </div>
 
-  <ion-card button routerLink="/registrar">
-    <ion-card-header class="ion-text-center">
-      <ion-icon name="time-outline" size="large" color="primary"></ion-icon>
-      <ion-card-title>Registrar fichaje</ion-card-title>
-      <ion-card-subtitle>Inicia o finaliza tu jornada</ion-card-subtitle>
-    </ion-card-header>
-  </ion-card>
+  <div class="inicio-lista">
+    <ion-card button routerLink="/registrar" class="inicio-opcion">
+      <div class="inicio-cuerpo">
+        <div class="inicio-icono" style="background: var(--ion-color-success)">
+          <ion-icon name="time-outline"></ion-icon>
+        </div>
+        <div class="inicio-texto">
+          <h3>Registrar fichaje</h3>
+          <p>Inicia o finaliza tu jornada</p>
+        </div>
+        <ion-icon class="inicio-flecha" name="chevron-forward-outline"></ion-icon>
+      </div>
+    </ion-card>
 
-  <ion-card button routerLink="/consulta">
-    <ion-card-header class="ion-text-center">
-      <ion-icon name="list-outline" size="large" color="primary"></ion-icon>
-      <ion-card-title>Consulta fichajes</ion-card-title>
-      <ion-card-subtitle>Revisa tus fichajes por fechas</ion-card-subtitle>
-    </ion-card-header>
-  </ion-card>
+    <ion-card button routerLink="/consulta" class="inicio-opcion">
+      <div class="inicio-cuerpo">
+        <div class="inicio-icono" style="background: var(--ion-color-primary)">
+          <ion-icon name="list-outline"></ion-icon>
+        </div>
+        <div class="inicio-texto">
+          <h3>Consulta fichajes</h3>
+          <p>Revisa tus fichajes por fechas</p>
+        </div>
+        <ion-icon class="inicio-flecha" name="chevron-forward-outline"></ion-icon>
+      </div>
+    </ion-card>
+  </div>
 </ion-content>

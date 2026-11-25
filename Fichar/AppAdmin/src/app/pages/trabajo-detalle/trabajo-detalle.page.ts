@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   ToastController,
   IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonMenuButton,
-  IonContent, IonList, IonItem, IonInput, IonButton,
+  IonContent, IonCard, IonInput, IonButton, IonIcon,
 } from '@ionic/angular';
+import { addIcons } from 'ionicons';
+import { fingerPrintOutline, briefcaseOutline, closeOutline, saveOutline } from 'ionicons/icons';
 import { Trabajo } from '../../models/models';
 import { Trabajos } from '../../services/trabajos';
 
@@ -13,9 +15,9 @@ import { Trabajos } from '../../services/trabajos';
   selector: 'app-trabajo-detalle',
   templateUrl: './trabajo-detalle.page.html',
   imports: [
-    ReactiveFormsModule,
+    ReactiveFormsModule, RouterLink,
     IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonMenuButton,
-    IonContent, IonList, IonItem, IonInput, IonButton,
+    IonContent, IonCard, IonInput, IonButton, IonIcon,
   ],
 })
 export class TrabajoDetallePage implements OnInit {
@@ -30,7 +32,9 @@ export class TrabajoDetallePage implements OnInit {
     private router: Router,
     private srv: Trabajos,
     private toastCtrl: ToastController,
-  ) {}
+  ) {
+    addIcons({ fingerPrintOutline, briefcaseOutline, closeOutline, saveOutline });
+  }
 
   ngOnInit() {
     const param = this.route.snapshot.paramMap.get('id');

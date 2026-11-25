@@ -2,10 +2,13 @@ import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import {
   IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonMenuButton, IonButton,
-  IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonIcon,
+  IonCard, IonIcon,
 } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { peopleOutline, briefcaseOutline, timeOutline, logOutOutline } from 'ionicons/icons';
+import {
+  personCircleOutline, peopleOutline, briefcaseOutline, timeOutline,
+  chevronForwardOutline, logOutOutline,
+} from 'ionicons/icons';
 import { Auth } from '../services/auth';
 
 @Component({
@@ -13,15 +16,19 @@ import { Auth } from '../services/auth';
   templateUrl: 'home.page.html',
   imports: [
     RouterLink, IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonMenuButton, IonButton,
-    IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonIcon,
+    IonCard, IonIcon,
   ],
 })
 export class HomePage {
   auth = inject(Auth);
   private router = inject(Router);
+  fecha = new Date().toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
 
   constructor() {
-    addIcons({ peopleOutline, briefcaseOutline, timeOutline, logOutOutline });
+    addIcons({
+      personCircleOutline, peopleOutline, briefcaseOutline, timeOutline,
+      chevronForwardOutline, logOutOutline,
+    });
   }
 
   salir() {

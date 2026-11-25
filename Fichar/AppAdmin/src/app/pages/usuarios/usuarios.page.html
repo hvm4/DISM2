@@ -1,32 +1,43 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
     <ion-title>Usuarios</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    @for (u of usuarios(); track u.IdUsuario) {
-      <ion-item lines="full">
-        <ion-label style="cursor: pointer" [routerLink]="['/usuarios', u.IdUsuario]">
+  <p class="lista-resumen">
+    {{ usuarios().length === 1 ? '1 usuario' : usuarios().length + ' usuarios' }}
+  </p>
+
+  @for (u of usuarios(); track u.IdUsuario) {
+    <ion-card class="fila">
+      <div class="fila-cuerpo">
+        <div class="fila-avatar">
+          <ion-icon name="person-outline"></ion-icon>
+        </div>
+        <div class="fila-texto" [routerLink]="['/usuarios', u.IdUsuario]">
           <h2>{{ u.Nombre }}</h2>
           <p>{{ u.Usuario }}</p>
-        </ion-label>
-        <ion-button slot="end" fill="clear" color="danger" aria-label="Borrar usuario"
-                    (click)="borrar(u)">
-          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </div>
+        <ion-button fill="clear" color="danger" aria-label="Borrar usuario" (click)="borrar(u)">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
         </ion-button>
-      </ion-item>
-    } @empty {
-      <ion-item><ion-label>No hay usuarios</ion-label></ion-item>
-    }
-  </ion-list>
+      </div>
+    </ion-card>
+  } @empty {
+    <div class="vacio">
+      <ion-icon name="people-outline"></ion-icon>
+      <p>No hay usuarios todavía</p>
+    </div>
+  }
+
+  <div class="espacio-fab"></div>
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button routerLink="/usuarios/nuevo">
+    <ion-fab-button routerLink="/usuarios/nuevo" aria-label="Nuevo usuario">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

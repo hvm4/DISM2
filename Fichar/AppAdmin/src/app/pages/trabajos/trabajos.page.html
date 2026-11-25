@@ -1,28 +1,41 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start"><ion-menu-button></ion-menu-button></ion-buttons>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start"><ion-menu-button autoHide="false"></ion-menu-button></ion-buttons>
     <ion-title>Trabajos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    @for (t of trabajos(); track t.IdTrabajo) {
-      <ion-item lines="full">
-        <ion-label style="cursor: pointer" [routerLink]="['/trabajos', t.IdTrabajo]">
-          {{ t.Nombre }}
-        </ion-label>
-        <ion-button slot="end" fill="clear" color="danger" aria-label="Borrar trabajo"
-                    (click)="borrar(t)">
-          <ion-icon slot="icon-only" name="trash"></ion-icon>
+  <p class="lista-resumen">
+    {{ trabajos().length === 1 ? '1 trabajo' : trabajos().length + ' trabajos' }}
+  </p>
+
+  @for (t of trabajos(); track t.IdTrabajo) {
+    <ion-card class="fila">
+      <div class="fila-cuerpo">
+        <div class="fila-avatar">
+          <ion-icon name="briefcase-outline"></ion-icon>
+        </div>
+        <div class="fila-texto" [routerLink]="['/trabajos', t.IdTrabajo]">
+          <h2>{{ t.Nombre }}</h2>
+        </div>
+        <ion-button fill="clear" color="danger" aria-label="Borrar trabajo" (click)="borrar(t)">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
         </ion-button>
-      </ion-item>
-    } @empty {
-      <ion-item><ion-label>No hay trabajos</ion-label></ion-item>
-    }
-  </ion-list>
+      </div>
+    </ion-card>
+  } @empty {
+    <div class="vacio">
+      <ion-icon name="briefcase-outline"></ion-icon>
+      <p>No hay trabajos todavía</p>
+    </div>
+  }
+
+  <div class="espacio-fab"></div>
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button routerLink="/trabajos/nuevo"><ion-icon name="add"></ion-icon></ion-fab-button>
+    <ion-fab-button routerLink="/trabajos/nuevo" aria-label="Nuevo trabajo">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
   </ion-fab>
 </ion-content>

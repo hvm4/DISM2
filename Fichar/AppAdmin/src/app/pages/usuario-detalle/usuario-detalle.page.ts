@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   ToastController,
   IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonMenuButton,
-  IonContent, IonList, IonItem, IonInput, IonButton,
+  IonContent, IonCard, IonInput, IonInputPasswordToggle, IonButton, IonIcon,
 } from '@ionic/angular';
+import { addIcons } from 'ionicons';
+import {
+  fingerPrintOutline, personOutline, atOutline, lockClosedOutline, closeOutline, saveOutline,
+} from 'ionicons/icons';
 import { Usuario } from '../../models/models';
 import { Usuarios } from '../../services/usuarios';
 
@@ -13,9 +17,9 @@ import { Usuarios } from '../../services/usuarios';
   selector: 'app-usuario-detalle',
   templateUrl: './usuario-detalle.page.html',
   imports: [
-    ReactiveFormsModule,
+    ReactiveFormsModule, RouterLink,
     IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonMenuButton,
-    IonContent, IonList, IonItem, IonInput, IonButton,
+    IonContent, IonCard, IonInput, IonInputPasswordToggle, IonButton, IonIcon,
   ],
 })
 export class UsuarioDetallePage implements OnInit {
@@ -32,7 +36,11 @@ export class UsuarioDetallePage implements OnInit {
     private router: Router,
     private srv: Usuarios,
     private toastCtrl: ToastController,
-  ) {}
+  ) {
+    addIcons({
+      fingerPrintOutline, personOutline, atOutline, lockClosedOutline, closeOutline, saveOutline,
+    });
+  }
 
   ngOnInit() {
     const param = this.route.snapshot.paramMap.get('id');

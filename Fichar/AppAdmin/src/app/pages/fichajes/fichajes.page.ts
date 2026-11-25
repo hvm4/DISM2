@@ -2,10 +2,10 @@ import { Component, computed, signal } from '@angular/core';
 import {
   ToastController,
   IonHeader, IonToolbar, IonTitle, IonButtons, IonMenuButton, IonContent,
-  IonSearchbar, IonInput, IonItem, IonList, IonLabel, IonButton, IonIcon, IonModal,
+  IonSearchbar, IonInput, IonCard, IonButton, IonIcon, IonModal,
 } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { map } from 'ionicons/icons';
+import { mapOutline, timeOutline, briefcaseOutline, logInOutline, logOutOutline } from 'ionicons/icons';
 import * as L from 'leaflet';
 import { Fichaje } from '../../models/models';
 import { Fichajes } from '../../services/fichajes';
@@ -15,7 +15,7 @@ import { Fichajes } from '../../services/fichajes';
   templateUrl: './fichajes.page.html',
   imports: [
     IonHeader, IonToolbar, IonTitle, IonButtons, IonMenuButton, IonContent,
-    IonSearchbar, IonInput, IonItem, IonList, IonLabel, IonButton, IonIcon, IonModal,
+    IonSearchbar, IonInput, IonCard, IonButton, IonIcon, IonModal,
   ],
 })
 export class FichajesPage {
@@ -34,7 +34,7 @@ export class FichajesPage {
   });
 
   constructor(private srv: Fichajes, private toastCtrl: ToastController) {
-    addIcons({ map });
+    addIcons({ mapOutline, timeOutline, briefcaseOutline, logInOutline, logOutOutline });
   }
 
   ionViewWillEnter() { this.cargar(); }

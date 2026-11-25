@@ -1,46 +1,69 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
     <ion-title>Consulta fichajes</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item>
-      <ion-input label="Desde" type="date" [value]="desde()" (ionChange)="cambiarDesde($event)"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input label="Hasta" type="date" [value]="hasta()" (ionChange)="cambiarHasta($event)"></ion-input>
-    </ion-item>
-  </ion-list>
+  <ion-card class="filtros">
+    <ion-input label="Desde" labelPlacement="stacked" fill="outline" type="date"
+               [value]="desde()" (ionChange)="cambiarDesde($event)"></ion-input>
+    <ion-input label="Hasta" labelPlacement="stacked" fill="outline" type="date"
+               [value]="hasta()" (ionChange)="cambiarHasta($event)"></ion-input>
+    <ion-button class="filtros-hoy" size="small" fill="outline" (click)="verHoy()">
+      <ion-icon slot="start" name="today-outline"></ion-icon>
+      Hoy
+    </ion-button>
+  </ion-card>
 
-  <div class="ion-padding-horizontal ion-padding-top">
-    <ion-button size="small" fill="outline" (click)="verHoy()">Hoy</ion-button>
-  </div>
+  <p class="lista-resumen">
+    {{ fichajes().length === 1 ? '1 fichaje' : fichajes().length + ' fichajes' }}
+  </p>
 
-  <ion-list>
-    @for (f of fichajes(); track f.IdFichaje) {
-      <ion-item lines="full">
-        <ion-label class="ion-text-wrap">
+  @for (f of fichajes(); track f.IdFichaje) {
+    <ion-card class="fila" [class.abierto]="!f.FechaHoraSalida" [class.cerrado]="!!f.FechaHoraSalida">
+      <div class="fila-cuerpo">
+        <div class="fila-avatar">
+          <ion-icon name="time-outline"></ion-icon>
+        </div>
+        <div class="fila-texto">
           <h2>{{ f.NombreTrabajo }}</h2>
-          <p>Entrada: {{ f.FechaHoraEntrada }}</p>
-          <p>Salida: {{ f.FechaHoraSalida ?? 'Abierto' }}</p>
-          @if (f.GeolocalizacionLatitud != null && f.GeolocalizacionLongitud != null) {
-            <p>
-              Ubicación: {{ f.GeolocalizacionLatitud | number: '1.5-5' }},
+          <p class="fichaje-linea">
+            <ion-icon name="log-in-outline"></ion-icon> {{ f.FechaHoraEntrada }}
+          </p>
+          <p class="fichaje-linea">
+            <ion-icon name="log-out-outline"></ion-icon>
+            @if (f.FechaHoraSalida) {
+              {{ f.FechaHoraSalida }}
+            } @else {
+              <span class="etiqueta etiqueta-abierto">Abierto</span>
+            }
+          </p>
+          <p class="fichaje-linea">
+            <ion-icon name="location-outline"></ion-icon>
+            @if (f.GeolocalizacionLatitud != null && f.GeolocalizacionLongitud != null) {
+              {{ f.GeolocalizacionLatitud | number: '1.5-5' }},
               {{ f.GeolocalizacionLongitud | number: '1.5-5' }}
-              · <a [href]="enlaceMapa(f)" target="_blank" rel="noopener">Ver mapa</a>
-            </p>
-          } @else {
-            <p>Ubicación: sin datos</p>
-          }
-        </ion-label>
-      </ion-item>
-    } @empty {
-      <ion-item><ion-label>No hay fichajes en este periodo</ion-label></ion-item>
-    }
-  </ion-list>
+            } @else {
+              Sin datos de ubicación
+            }
+          </p>
+        </div>
+        @if (f.GeolocalizacionLatitud != null && f.GeolocalizacionLongitud != null) {
+          <ion-button fill="clear" [href]="enlaceMapa(f)" target="_blank" rel="noopener"
+                      aria-label="Ver ubicación en el mapa">
+            <ion-icon slot="icon-only" name="map-outline"></ion-icon>
+          </ion-button>
+        }
+      </div>
+    </ion-card>
+  } @empty {
+    <div class="vacio">
+      <ion-icon name="time-outline"></ion-icon>
+      <p>No hay fichajes en este periodo</p>
+    </div>
+  }
 </ion-content>

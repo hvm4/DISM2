@@ -2,9 +2,12 @@ import { Component, inject, signal } from '@angular/core';
 import {
   ToastController,
   IonHeader, IonToolbar, IonTitle, IonButtons, IonMenuButton, IonContent,
-  IonSpinner, IonList, IonItem, IonSelect, IonSelectOption, IonButton,
-  IonCard, IonCardHeader, IonCardTitle, IonCardContent,
+  IonSpinner, IonSelect, IonSelectOption, IonButton, IonCard, IonIcon,
 } from '@ionic/angular';
+import { addIcons } from 'ionicons';
+import {
+  playCircleOutline, hourglassOutline, briefcaseOutline, logInOutline, playOutline, stopCircleOutline,
+} from 'ionicons/icons';
 import { Geolocation } from '@capacitor/geolocation';
 
 import { Fichaje, Trabajo } from '../../models/models';
@@ -17,8 +20,7 @@ import { Fichajes } from '../../services/fichajes';
   templateUrl: './registrar.page.html',
   imports: [
     IonHeader, IonToolbar, IonTitle, IonButtons, IonMenuButton, IonContent,
-    IonSpinner, IonList, IonItem, IonSelect, IonSelectOption, IonButton,
-    IonCard, IonCardHeader, IonCardTitle, IonCardContent,
+    IonSpinner, IonSelect, IonSelectOption, IonButton, IonCard, IonIcon,
   ],
 })
 export class RegistrarPage {
@@ -33,6 +35,12 @@ export class RegistrarPage {
   abierto = signal<Fichaje | null>(null);
   trabajoSel = signal<number | null>(null);
   guardando = signal(false);
+
+  constructor() {
+    addIcons({
+      playCircleOutline, hourglassOutline, briefcaseOutline, logInOutline, playOutline, stopCircleOutline,
+    });
+  }
 
   ionViewWillEnter() {
     this.cargar();

@@ -1,27 +1,41 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/trabajos"></ion-back-button>
     </ion-buttons>
     <ion-title>{{ id === null ? 'Nuevo trabajo' : 'Trabajo' }}</ion-title>
     <ion-buttons slot="end">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <form [formGroup]="form" (ngSubmit)="guardar()">
-    <ion-list>
+<ion-content>
+  <ion-card class="formulario">
+    <form [formGroup]="form" (ngSubmit)="guardar()">
       @if (id !== null) {
-        <ion-item>
-          <ion-input label="Id" labelPlacement="stacked" [value]="id" readonly></ion-input>
-        </ion-item>
+        <ion-input label="Id" labelPlacement="stacked" fill="outline" [value]="id" readonly>
+          <ion-icon slot="start" name="finger-print-outline" aria-hidden="true"></ion-icon>
+        </ion-input>
       }
-      <ion-item>
-        <ion-input label="Nombre *" labelPlacement="stacked" formControlName="Nombre"></ion-input>
-      </ion-item>
-    </ion-list>
-    <ion-button type="submit" expand="block" class="ion-margin-top">Guardar</ion-button>
-  </form>
+
+      <ion-input label="Nombre *" labelPlacement="stacked" fill="outline" formControlName="Nombre">
+        <ion-icon slot="start" name="briefcase-outline" aria-hidden="true"></ion-icon>
+      </ion-input>
+      @if (form.controls.Nombre.touched && form.controls.Nombre.invalid) {
+        <p class="campo-error">El nombre es obligatorio (máximo 200 caracteres)</p>
+      }
+
+      <div class="formulario-botones">
+        <ion-button fill="outline" routerLink="/trabajos">
+          <ion-icon slot="start" name="close-outline"></ion-icon>
+          Cancelar
+        </ion-button>
+        <ion-button type="submit">
+          <ion-icon slot="start" name="save-outline"></ion-icon>
+          Guardar
+        </ion-button>
+      </div>
+    </form>
+  </ion-card>
 </ion-content>

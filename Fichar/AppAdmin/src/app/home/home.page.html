@@ -13,30 +13,53 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <h2>Hola, {{ auth.usuario()?.Nombre }}</h2>
+<ion-content>
+  <div class="inicio-hero">
+    <ion-icon name="person-circle-outline"></ion-icon>
+    <div>
+      <h2>Hola, {{ auth.usuario()?.Nombre }}</h2>
+      <p>{{ fecha }}</p>
+    </div>
+  </div>
 
-  <ion-card button routerLink="/usuarios">
-    <ion-card-header class="ion-text-center">
-      <ion-icon name="people-outline" size="large" color="primary"></ion-icon>
-      <ion-card-title>Usuarios</ion-card-title>
-      <ion-card-subtitle>Alta, edición y baja de usuarios</ion-card-subtitle>
-    </ion-card-header>
-  </ion-card>
+  <div class="inicio-lista">
+    <ion-card button routerLink="/usuarios" class="inicio-opcion">
+      <div class="inicio-cuerpo">
+        <div class="inicio-icono" style="background: var(--ion-color-primary)">
+          <ion-icon name="people-outline"></ion-icon>
+        </div>
+        <div class="inicio-texto">
+          <h3>Usuarios</h3>
+          <p>Alta, edición y baja de usuarios</p>
+        </div>
+        <ion-icon class="inicio-flecha" name="chevron-forward-outline"></ion-icon>
+      </div>
+    </ion-card>
 
-  <ion-card button routerLink="/trabajos">
-    <ion-card-header class="ion-text-center">
-      <ion-icon name="briefcase-outline" size="large" color="primary"></ion-icon>
-      <ion-card-title>Trabajos</ion-card-title>
-      <ion-card-subtitle>Gestión de los trabajos disponibles</ion-card-subtitle>
-    </ion-card-header>
-  </ion-card>
+    <ion-card button routerLink="/trabajos" class="inicio-opcion">
+      <div class="inicio-cuerpo">
+        <div class="inicio-icono" style="background: var(--ion-color-tertiary)">
+          <ion-icon name="briefcase-outline"></ion-icon>
+        </div>
+        <div class="inicio-texto">
+          <h3>Trabajos</h3>
+          <p>Gestión de los trabajos disponibles</p>
+        </div>
+        <ion-icon class="inicio-flecha" name="chevron-forward-outline"></ion-icon>
+      </div>
+    </ion-card>
 
-  <ion-card button routerLink="/fichajes">
-    <ion-card-header class="ion-text-center">
-      <ion-icon name="time-outline" size="large" color="primary"></ion-icon>
-      <ion-card-title>Fichajes</ion-card-title>
-      <ion-card-subtitle>Consulta de fichajes y ubicaciones</ion-card-subtitle>
-    </ion-card-header>
-  </ion-card>
+    <ion-card button routerLink="/fichajes" class="inicio-opcion">
+      <div class="inicio-cuerpo">
+        <div class="inicio-icono" style="background: var(--ion-color-success)">
+          <ion-icon name="time-outline"></ion-icon>
+        </div>
+        <div class="inicio-texto">
+          <h3>Fichajes</h3>
+          <p>Consulta de fichajes y ubicaciones</p>
+        </div>
+        <ion-icon class="inicio-flecha" name="chevron-forward-outline"></ion-icon>
+      </div>
+    </ion-card>
+  </div>
 </ion-content>

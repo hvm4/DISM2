@@ -3,13 +3,11 @@ import { RouterLink } from '@angular/router';
 import {
   AlertController,
   ToastController,
-  IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonContent,
-  IonList, IonItem, IonLabel, IonItemSliding, IonItemOptions, IonItemOption,
-  IonFab, IonFabButton, IonIcon, IonMenuButton,IonButton
+  IonHeader, IonToolbar, IonTitle, IonButtons, IonMenuButton, IonContent,
+  IonCard, IonFab, IonFabButton, IonIcon, IonButton,
 } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { add, trash } from 'ionicons/icons';
-
+import { add, trashOutline, personOutline, peopleOutline } from 'ionicons/icons';
 
 import { Usuario } from '../../models/models';
 import { Usuarios as UsuariosService } from '../../services/usuarios';
@@ -21,8 +19,7 @@ import { Usuarios as UsuariosService } from '../../services/usuarios';
   imports: [
     RouterLink,
     IonHeader, IonToolbar, IonTitle, IonButtons, IonMenuButton, IonContent,
-    IonList, IonItem, IonLabel, IonItemSliding, IonItemOptions, IonItemOption,
-    IonFab, IonFabButton, IonIcon, IonButton
+    IonCard, IonFab, IonFabButton, IonIcon, IonButton,
   ],
 })
 export class UsuariosPage {
@@ -33,7 +30,7 @@ export class UsuariosPage {
     private alertCtrl: AlertController,
     private toastCtrl: ToastController,
   ) {
-    addIcons({ add, trash});
+    addIcons({ add, trashOutline, personOutline, peopleOutline });
   }
 
   ionViewWillEnter() {

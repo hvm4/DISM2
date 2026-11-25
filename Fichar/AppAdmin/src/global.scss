@@ -35,3 +35,273 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+ion-card-header ion-icon {
+  display: block;
+  margin: 0 auto 8px;
+  font-size: 48px;
+}
+
+/* ---------- Pantalla de inicio ---------- */
+.inicio-hero {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 20px 44px;
+  color: #fff;
+  background: linear-gradient(160deg, var(--ion-color-primary) 0%, var(--ion-color-primary-tint) 100%);
+  border-radius: 0 0 32px 32px;
+}
+.inicio-hero > ion-icon {
+  font-size: 64px;
+  flex-shrink: 0;
+}
+.inicio-hero h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.inicio-hero p {
+  margin: 4px 0 0;
+  opacity: 0.85;
+  text-transform: capitalize;
+}
+
+.inicio-lista {
+  margin-top: -24px;       /* las tarjetas se montan sobre la cabecera */
+  padding-bottom: 16px;
+}
+.inicio-opcion {
+  margin: 12px 16px;
+  border-radius: 18px;
+}
+.inicio-cuerpo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+}
+.inicio-icono {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #fff;
+}
+.inicio-icono ion-icon {
+  font-size: 28px;
+}
+.inicio-texto h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ion-text-color);
+}
+.inicio-texto p {
+  margin: 2px 0 0;
+  font-size: 0.85rem;
+  color: var(--ion-color-medium);
+}
+.inicio-flecha {
+  margin-left: auto;
+  color: var(--ion-color-medium);
+}
+
+/* ---------- Pantalla de login ---------- */
+.login-fondo {
+  --background: linear-gradient(160deg, var(--ion-color-primary) 0%, var(--ion-color-primary-tint) 100%);
+}
+.login-contenedor {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+.login-logo {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  margin-bottom: 16px;
+}
+.login-logo ion-icon {
+  font-size: 46px;
+}
+.login-titulo {
+  margin: 0;
+  color: #fff;
+  font-size: 1.7rem;
+  font-weight: 700;
+  text-align: center;
+}
+.login-subtitulo {
+  margin: 4px 0 24px;
+  color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+}
+.login-tarjeta {
+  width: 100%;
+  max-width: 380px;
+  padding: 24px 20px;
+  border-radius: 20px;
+  background: var(--ion-card-background, #fff);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+.login-tarjeta ion-input {
+  margin-bottom: 16px;
+}
+.login-tarjeta ion-input ion-icon[slot='start'] {
+  margin-right: 8px;
+  color: var(--ion-color-medium);
+}
+.login-tarjeta ion-button {
+  margin-top: 8px;
+  height: 48px;
+  font-weight: 600;
+  --border-radius: 12px;
+}
+
+/* ---------- Listas, formularios y fichajes ---------- */
+.fila {
+  margin: 10px 16px;
+  border-radius: 16px;
+}
+.fila-cuerpo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 8px 12px 14px;
+}
+.fila-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: rgba(var(--ion-color-primary-rgb), 0.12);
+  color: var(--ion-color-primary);
+}
+.fila-avatar ion-icon {
+  font-size: 24px;
+}
+.fila-texto {
+  flex: 1;
+  min-width: 0;
+  cursor: pointer;
+}
+.fila-texto.sin-enlace {
+  cursor: default;
+}
+.fila-texto h2 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ion-text-color);
+}
+.fila-texto p {
+  margin: 2px 0 0;
+  font-size: 0.85rem;
+  color: var(--ion-color-medium);
+}
+.lista-resumen {
+  margin: 16px 20px 0;
+  font-size: 0.85rem;
+  color: var(--ion-color-medium);
+}
+.espacio-fab {
+  height: 88px;
+}
+.vacio {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--ion-color-medium);
+}
+.vacio ion-icon {
+  font-size: 56px;
+  opacity: 0.6;
+}
+.vacio p {
+  margin: 8px 0 0;
+}
+
+.formulario {
+  margin: 16px;
+  padding: 20px 16px;
+  border-radius: 16px;
+}
+.formulario ion-input {
+  margin-bottom: 16px;
+}
+.formulario ion-input ion-icon[slot='start'] {
+  margin-right: 8px;
+  color: var(--ion-color-medium);
+}
+.campo-error {
+  margin: -10px 4px 14px;
+  font-size: 0.8rem;
+  color: var(--ion-color-danger);
+}
+.formulario-botones {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+.formulario-botones ion-button {
+  flex: 1;
+  height: 46px;
+  font-weight: 600;
+  --border-radius: 12px;
+}
+
+.filtros {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 16px;
+  padding: 16px;
+  border-radius: 16px;
+}
+.fila.abierto {
+  border-left: 5px solid var(--ion-color-success);
+}
+.fila.cerrado {
+  border-left: 5px solid var(--ion-color-primary-tint);
+}
+.fichaje-linea {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 2px 0 0;
+  font-size: 0.85rem;
+  color: var(--ion-color-medium);
+}
+.fichaje-linea ion-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.etiqueta {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.etiqueta-abierto {
+  background: rgba(var(--ion-color-success-rgb), 0.15);
+  color: var(--ion-color-success-shade);
+}
+.etiqueta-cerrado {
+  background: rgba(var(--ion-color-primary-rgb), 0.12);
+  color: var(--ion-color-primary);
+}

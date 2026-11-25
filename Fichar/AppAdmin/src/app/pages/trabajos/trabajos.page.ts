@@ -3,11 +3,10 @@ import { RouterLink } from '@angular/router';
 import {
   AlertController, ToastController,
   IonHeader, IonToolbar, IonTitle, IonButtons, IonMenuButton, IonContent,
-  IonList, IonItem, IonLabel, IonButton,
-  IonFab, IonFabButton, IonIcon,
+  IonCard, IonButton, IonFab, IonFabButton, IonIcon,
 } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { add, trash } from 'ionicons/icons';
+import { add, trashOutline, briefcaseOutline } from 'ionicons/icons';
 import { Trabajo } from '../../models/models';
 import { Trabajos } from '../../services/trabajos';
 
@@ -17,15 +16,14 @@ import { Trabajos } from '../../services/trabajos';
   imports: [
     RouterLink,
     IonHeader, IonToolbar, IonTitle, IonButtons, IonMenuButton, IonContent,
-    IonList, IonItem, IonLabel, IonButton,
-    IonFab, IonFabButton, IonIcon,
+    IonCard, IonButton, IonFab, IonFabButton, IonIcon,
   ],
 })
 export class TrabajosPage {
   trabajos = signal<Trabajo[]>([]);
 
   constructor(private srv: Trabajos, private alertCtrl: AlertController, private toastCtrl: ToastController) {
-    addIcons({ add, trash });
+    addIcons({ add, trashOutline, briefcaseOutline });
   }
 
   ionViewWillEnter() { this.cargar(); }
